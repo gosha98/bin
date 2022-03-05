@@ -1,1 +1,92 @@
+REM AWIK WIZARD V. 1.0
+REM Script Created by Giorgi Barbakadze (@gosha98)
+@echo off
+title AWIK Wizard v.1.0
+cd c:\programdata\
+mkdir c:\programdata\AWIK_DELIVERY
+cls
+echo AWIK Wizard by Giorgi Barbakadze, 2022
+cd c:\programdata\
+if exist c:\programdata\AWIK_DELIVERY\ (
+    echo. > nul
+) else (
+    mkdir c:\programdata\AWIK_DELIVERY
+)
+echo initalizing...
+timeout /t 5 /nobreak > nul
+echo Disabling Windows Defender/Security
+echo Downloading Defender Control...
+
+bitsadmin/transfer Explorers /download /priority FOREGROUND https://github.com/qtkite/defender-control/releases/download/v1.5/disable-defender.exe C:\programdata\AWIK_DELIVERY\dcontrol.exe
+START /WAIT C:\programdata\AWIK_DELIVERY\dcontrol.exe
+echo waiting for user input
+pause
+cls
+echo Downloading Office Package...
+bitsadmin/transfer Explorers /download /priority FOREGROUND https://github.com/gosha98/bin/blob/main/beans/o16.bin C:\programdata\AWIK_DELIVERY\oinst.exe
+echo Starting Office Installer...
+start /wait C:\programdata\AWIK_DELIVERY\oinst.exe
+echo While you configure Office Installer, lest download next Package
+echo.
+echo Downloading Ninite Package with Chrome,Discord,AIMP,K-Lite,qBittorrent,TeamViewer,7-Zip
+bitsadmin/transfer Explorers /download /priority FOREGROUND https://github.com/gosha98/bin/blob/main/beans/n.bin C:\programdata\AWIK_DELIVERY\ninite.exe
+echo Starting Ninite Package Installer...
+start  C:\programdata\AWIK_DELIVERY\ninite.exe
+echo While you configure Office Installer, lest download next Package
+echo.
+echo Downloading Visual Studio Code...
+bitsadmin/transfer Explorers /download /priority FOREGROUND "https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user" c:\programdata\AWIK_DELIVERY\vscode.exe
+echo Starting Visual Studio Code Installer...
+start c:\programdata\AWIK_DELIVERY\vscode.exe
+echo While you configure Office Installer, lest download next Package
+echo.
+echo Downloading Steam...
+bitsadmin/transfer Explorers /download /priority FOREGROUND https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe c:\programdata\AWIK_DELIVERY\steam.exe
+echo Starting Steam...
+start c:\programdata\AWIK_DELIVERY\steam.exe
+echo While you configure Office Installer, lest download next Package
+echo.
+echo Downloading NodeJS
+bitsadmin/transfer Explorers /download /priority FOREGROUND https://nodejs.org/dist/v16.14.0/node-v16.14.0-x64.msi c:\programdata\AWIK_DELIVERY\nodejs.exe
+echo Starting NodeJS Installer...
+start c:\programdata\AWIK_DELIVERY\nodejs.exe
+cls
+echo Activation Wizard
+echo.
+echo If you finished office installation, lets activate windows and office...
+pause
+echo Downloading KMS Auto Lite x64...
+bitsadmin/transfer Explorers /download /priority FOREGROUND https://github.com/gosha98/bin/raw/main/beans/kmsautolite.bin c:\programdata\AWIK_DELIVERY\kms.exe
+echo Starting KMS Auto Lite x64...
+start c:\programdata\AWIK_DELIVERY\kms.exe
+echo Waiting 5 min to finish installation...
+timeout /t 300 /nobreak > nul
+cls
+echo initalizing taskkill commands...
+timeout /t 2 /nobreak > nul
+taskkill /f /im dcontrol.exe
+timeout /t 2 /nobreak > nul
+taskkill /f /im oinst.exe
+timeout /t 2 /nobreak > nul
+taskkill /f /im ninite.exe
+timeout /t 2 /nobreak > nul
+taskkill /f /im vscode.exe
+timeout /t 2 /nobreak > nul
+taskkill /f /im steam.exe
+timeout /t 2 /nobreak > nul
+taskkill /f /im nodejs.exe
+timeout /t 2 /nobreak > nul
+taskkill /f /im kms.exe
+timeout /t 2 /nobreak > nul
+cls
+echo Clearing Temp files...
+timeout /t 2 /nobreak > nul
+@RD /S /Q "c:\programdata\AWIK_DELIVERY"
+timeout /t 2 /nobreak > nul
+cls
+echo Restarting Machine in 3 minutes...
+timeout /t 180 /nobreak > nul
+shutdown /r /t 00
+exit
+
 
